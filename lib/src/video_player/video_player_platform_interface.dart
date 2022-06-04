@@ -210,6 +210,7 @@ class DataSource {
     this.notificationChannelName,
     this.overriddenDuration,
     this.licenseUrl,
+    this.certificateUrl,
     this.drmHeaders,
   }) : assert(uri == null || asset == null);
 
@@ -276,6 +277,8 @@ class DataSource {
   final Duration overriddenDuration;
 
   final String licenseUrl;
+
+  final String certificateUrl;
 
   final Map<String, String> drmHeaders;
 

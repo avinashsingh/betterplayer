@@ -1,14 +1,15 @@
 // Copyright 2017 The Chromium Authors. All rights reserved.
-// Copyright 2017 The Chromium Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
 // Dart imports:
 import 'dart:async';
 import 'dart:ui';
+import 'dart:io';
 
 // Flutter imports:
 import 'package:better_player/src/core/better_player_utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
@@ -57,6 +58,7 @@ class MethodChannelVideoPlayer extends VideoPlayerPlatform {
           'imageUrl': dataSource.imageUrl,
           'notificationChannelName': dataSource.notificationChannelName,
           'overriddenDuration': dataSource.overriddenDuration?.inMilliseconds,
+          'certificateUrl': dataSource.certificateUrl,
         };
         break;
       case DataSourceType.network:
@@ -75,6 +77,7 @@ class MethodChannelVideoPlayer extends VideoPlayerPlatform {
           'notificationChannelName': dataSource.notificationChannelName,
           'overriddenDuration': dataSource.overriddenDuration?.inMilliseconds,
           'licenseUrl': dataSource.licenseUrl,
+          'certificateUrl': dataSource.certificateUrl,
           'drmHeaders': dataSource.drmHeaders,
         };
         break;
@@ -91,6 +94,7 @@ class MethodChannelVideoPlayer extends VideoPlayerPlatform {
           'imageUrl': dataSource.imageUrl,
           'notificationChannelName': dataSource.notificationChannelName,
           'overriddenDuration': dataSource.overriddenDuration?.inMilliseconds,
+          'certificateUrl': dataSource.certificateUrl,
         };
         break;
     }
@@ -361,7 +365,15 @@ class MethodChannelVideoPlayer extends VideoPlayerPlatform {
 
   @override
   Widget buildView(int textureId) {
-    return Texture(textureId: textureId);
+    if (Platform.isIOS) {
+      return UiKitView(
+        viewType: 'com.jhomlala/better_player',
+        creationParamsCodec: const StandardMessageCodec(),
+        creationParams: {'textureId': textureId},
+      );
+    } else {
+      return Texture(textureId: textureId);
+    }
   }
 
   EventChannel _eventChannelFor(int textureId) {

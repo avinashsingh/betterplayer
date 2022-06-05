@@ -289,6 +289,9 @@ class VideoPlayerController extends ValueNotifier<VideoPlayerValue> {
     String imageUrl,
     String notificationChannelName,
     Duration overriddenDuration,
+    String licenseUrl,
+    String certificateUrl,
+    Map<String, String> drmHeaders,
   }) {
     return _setDataSource(
       DataSource(
@@ -301,6 +304,9 @@ class VideoPlayerController extends ValueNotifier<VideoPlayerValue> {
         imageUrl: imageUrl,
         notificationChannelName: notificationChannelName,
         overriddenDuration: overriddenDuration,
+        licenseUrl: licenseUrl,
+        certificateUrl: certificateUrl,
+        drmHeaders: drmHeaders,
       ),
     );
   }
@@ -363,6 +369,9 @@ class VideoPlayerController extends ValueNotifier<VideoPlayerValue> {
     String imageUrl,
     String notificationChannelName,
     Duration overriddenDuration,
+    String licenseUrl,
+    String certificateUrl,
+    Map<String, String> drmHeaders,
   }) {
     return _setDataSource(
       DataSource(
@@ -373,7 +382,11 @@ class VideoPlayerController extends ValueNotifier<VideoPlayerValue> {
           author: author,
           imageUrl: imageUrl,
           notificationChannelName: notificationChannelName,
-          overriddenDuration: overriddenDuration),
+          overriddenDuration: overriddenDuration,
+          licenseUrl: licenseUrl,
+          certificateUrl: certificateUrl,
+          drmHeaders: drmHeaders,
+      ),
     );
   }
 

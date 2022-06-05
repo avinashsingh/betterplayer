@@ -284,6 +284,7 @@ class BetterPlayerController extends ChangeNotifier {
       betterPlayerDataSource.url,
       _getHeaders(),
     );
+
     if (hlsData != null) {
       /// Load hls tracks
       if (_betterPlayerDataSource?.useHlsTracks == true) {
@@ -391,10 +392,13 @@ class BetterPlayerController extends ChangeNotifier {
           title: _betterPlayerDataSource?.notificationConfiguration?.title,
           author: _betterPlayerDataSource?.notificationConfiguration?.author,
           imageUrl:
-              _betterPlayerDataSource?.notificationConfiguration?.imageUrl,
+          _betterPlayerDataSource?.notificationConfiguration?.imageUrl,
           notificationChannelName: _betterPlayerDataSource
               ?.notificationConfiguration?.notificationChannelName,
           overriddenDuration: _betterPlayerDataSource.overriddenDuration,
+          licenseUrl: _betterPlayerDataSource?.drmConfiguration?.licenseUrl,
+          certificateUrl: _betterPlayerDataSource?.drmConfiguration?.certificateUrl,
+          drmHeaders: _betterPlayerDataSource?.drmConfiguration?.headers,
         );
         break;
       case BetterPlayerDataSourceType.memory:
@@ -413,6 +417,9 @@ class BetterPlayerController extends ChangeNotifier {
             notificationChannelName: _betterPlayerDataSource
                 ?.notificationConfiguration?.notificationChannelName,
             overriddenDuration: _betterPlayerDataSource.overriddenDuration,
+            licenseUrl: _betterPlayerDataSource?.drmConfiguration?.licenseUrl,
+            certificateUrl: _betterPlayerDataSource?.drmConfiguration?.certificateUrl,
+            drmHeaders: _betterPlayerDataSource?.drmConfiguration?.headers,
           );
           _tempFiles.add(file);
         } else {
